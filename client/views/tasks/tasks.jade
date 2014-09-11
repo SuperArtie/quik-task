@@ -1,0 +1,30 @@
+h1 {{title}}
+.row
+  .col-xs-3
+    form(novalidate, name='taskForm', role='form')
+      .form-group
+        label(for='name') Name
+        input.form-control#name(name='name', type='text', ng-model='task.name', ng-minlength='3', required, autofocus)
+      .form-group
+        label(for='due') Due
+        input.form-control#due(name='due', type='date', ng-model='task.due', required)
+      .form-group
+        label(for='priority') Priority
+        select#priority(name='priority', ng-model='task.priorityName', required)
+          option(ng-repeat='p in priorities') {{p.name}}
+      button.btn.btn-success(type='submit', ng-show='taskForm.$valid', ng-click='add()') +taSSkk+
+.row
+  .col-xs-5
+    .panel.panel-default
+      .panel-body
+        table.table.table-striped.table-hover.table-bordered
+          thead
+            th Name
+            th Due
+            th Priority
+          tbody
+            tr(ng-repeat='t in tasks')
+              td {{t.name}}
+              td {{t.due | date}}
+              td {{t.priority.name}}
+
